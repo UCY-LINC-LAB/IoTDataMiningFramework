@@ -16,7 +16,7 @@ public class DataPointCreator {
 		// TODO Auto-generated method stub
 		
 		DataPoint dp= new DoubleDataPoint("name", "type", 1.1, 1);
-		System.out.println(dp.name+" "+dp.sequenceID+" "+dp.timestamp+" "+dp.type+" "+dp.value);
+		System.out.println(dp.name+" "+dp.sequenceID+" "+dp.timestamp+" "+dp.type+" "+dp.getValue());
 		
 	}
 

@@ -12,8 +12,7 @@ public class IntDataPoint extends DataPoint{
 	int value;
 	
 	IntDataPoint(String name, String type, int value, int timestamp){
-		count++;
-		this.setSequenceID(count);
+		sequenceID++;
 		this.setName(name);
 		this.setType(type);
 		this.setValue(value);
@@ -34,8 +33,8 @@ public class IntDataPoint extends DataPoint{
 	 * ------------GETTERS--------------
 	 * 
 	 * */
-	public int getValue(){
-		return this.value;
+	public Double getValue(){
+		return new Double (this.value+1.0);
 	}
 	
 }

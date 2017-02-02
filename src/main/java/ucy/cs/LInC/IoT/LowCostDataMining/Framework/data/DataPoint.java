@@ -9,11 +9,11 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.data;
  */
 public abstract class DataPoint {
 
-	static int count;
-	int sequenceID;
+//	static int count; //na fygei
+	static int sequenceID=0;
 	String name;
 	String type;
-	Object value;
+//	Object value;
 	int timestamp;
 	
 //	DataPoint(int seq, String name, String type, int timestamp){
@@ -26,7 +26,7 @@ public abstract class DataPoint {
 	
 	/*
 	 * 
-	 * ------------SETTERS--------------
+	 * ------------SETTERS-------------- summarization, dist items, min max, avrg se window
 	 * 
 	 * */
 	public void setSequenceID(int seq){
@@ -70,5 +70,8 @@ public abstract class DataPoint {
 	public int getTimestamp(){
 		return this.timestamp;
 	}
+	
+	public abstract Double getValue();
+	
 	
 }

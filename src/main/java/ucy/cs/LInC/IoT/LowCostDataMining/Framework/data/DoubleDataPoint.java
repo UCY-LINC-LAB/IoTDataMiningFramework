@@ -11,8 +11,7 @@ public class DoubleDataPoint extends DataPoint{
 	double value;
 	
 	public DoubleDataPoint(String name, String type, double value, int timestamp){
-		count++;
-		this.setSequenceID(count);
+		sequenceID++;
 		this.setName(name);
 		this.setType(type);
 		this.setValue(value);
@@ -33,7 +32,7 @@ public class DoubleDataPoint extends DataPoint{
 	 * ------------GETTERS--------------
 	 * 
 	 * */
-	public double getValue(){
+	public Double getValue(){
 		return this.value;
 	}
 }

@@ -46,7 +46,7 @@ public class ReadCSV {
 
 	}
 	
-	public void readSome(String filename, String delimiter, int limit) {
+	public void readSome(String filename, String delimiter, int limit) {//range
 
 		BufferedReader br = null;
 		String line = "";
@@ -128,7 +128,7 @@ public class ReadCSV {
 			while ((line = br.readLine()) != null) {				
 				// use given delimiter as separator
 				String[] str = line.split(delimiter);
-				DataPoint dp= new DoubleDataPoint("dataPoint"+count, "double", Double.parseDouble(str[count]), 1);
+				DataPoint dp= new DoubleDataPoint("dataPoint"+count, "double", Double.parseDouble(str[0]), 1);
 				data.add(dp);
 				count++;
 			}
@@ -151,9 +151,13 @@ public class ReadCSV {
 	
 	public static void main(String args[]){
 		ReadCSV csv= new ReadCSV();
-		csv.readAll("test.csv", ",");
-		csv.readSome("test.csv", ",",3);
-		csv.getLine("test.csv", ",", 8);
+//		csv.readAll("test.csv", ",");
+//		csv.readSome("test.csv", ",",3);
+//		csv.getLine("test.csv", ",", 8);
+		ArrayList<DataPoint> res = csv.readData("test.csv", ",", 2);
+		for (DataPoint dataPoint : res) {
+			System.out.println(dataPoint.getName()+" "+(dataPoint.getValue().doubleValue()+1));
+		}
 	}
 
 }
