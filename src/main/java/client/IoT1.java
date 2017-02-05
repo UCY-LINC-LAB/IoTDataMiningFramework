@@ -3,10 +3,8 @@ package client;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-import ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.CumulativeMovingAverage;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.SimpleMovingAverage;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.TimeSeries;
-import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPointType;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleDataPoint;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.resource.ReadCSV;

@@ -1,7 +1,6 @@
 package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
-import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleDataPoint;
 
 public class CumulativeMovingAverage<T extends DataPoint> implements TimeSeries<T> {
 	

@@ -6,7 +6,6 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm;
 import java.util.ArrayList;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
-import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleDataPoint;
 
 /**
  * @author hamdy
