@@ -1,77 +1,80 @@
-package ucy.cs.LInC.IoT.LowCostDataMining.Framework.data;
 /**
  * 
  */
+package ucy.cs.LInC.IoT.LowCostDataMining.Framework.data;
 
 /**
- * @author hmicha01
+ * @author hamdy
  *
  */
 public abstract class DataPoint {
 
-//	static int count; //na fygei
-	static int sequenceID=0;
+	static int sequenceID = 0;
 	String name;
-	String type;
-//	Object value;
+	Object value;
 	int timestamp;
-	
-//	DataPoint(int seq, String name, String type, int timestamp){
-//		this.sequenceID=seq;
-//		this.name=name;
-//		this.type=type;
-////		this.value=value;
-//		this.timestamp=timestamp;
-//	}
-	
+	private DataPointType type;
+
+	public DataPoint(String name, int timestamp, DataPointType type) {
+		this.type = type;
+		buildMetaData();
+	}
+
+	private void buildMetaData() {
+		// build meta-data
+		sequenceID++;
+		this.setName(name);
+		this.setTimestamp(timestamp);
+	}
+
+	// Do subclass level processing in this method
+	protected abstract void construct();
+
+	public Object getValue() { //throw exception to specify order
+		return this.value;
+	}
+
 	/*
 	 * 
-	 * ------------SETTERS-------------- summarization, dist items, min max, avrg se window
+	 * ------------SETTERS-------------- summarization, dist items, min max,
+	 * avrg se window
 	 * 
-	 * */
-	public void setSequenceID(int seq){
-		this.sequenceID=seq;
+	 */
+	public void setSequenceID(int seq) {
+		this.sequenceID = seq;
 	}
-	
-	public void setName(String name){
-		this.name=name;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	
-	public void setType(String type){
-		this.type=type;
+
+	public void setTimestamp(int timestamp) {
+		this.timestamp = timestamp;
 	}
-	
-	public void setTimestamp(int timestamp){
-		this.timestamp=timestamp;
+
+	public void setType(DataPointType type) {
+		this.type = type;
 	}
-	
-	
-	
+
 	/*
 	 * 
 	 * ------------GETTERS--------------
 	 * 
-	 * */
-	public int getSequenceID(){
+	 */
+	public int getSequenceID() {
 		return this.sequenceID;
 	}
-	
-	public String getName(){
+
+	public String getName() {
 		return this.name;
 	}
-	
-	public String getType(){
-		return this.type;
-	}
-	
-//	public int getSequenceID(){
-//		return this.sequenceID;
-//	}
-	public int getTimestamp(){
+
+	public int getTimestamp() {
 		return this.timestamp;
 	}
-	
-	public abstract Double getValue();
-	
-	
+
+	public DataPointType getType() {
+		return this.type;
+	}
+
 }

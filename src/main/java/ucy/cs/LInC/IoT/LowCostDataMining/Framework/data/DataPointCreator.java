@@ -1,23 +1,21 @@
 package ucy.cs.LInC.IoT.LowCostDataMining.Framework.data;
-/**
- * 
- */
 
-/**
- * @author hmicha01
- *
- */
 public class DataPointCreator {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		DataPoint dp= new DoubleDataPoint("name", "type", 1.1, 1);
-		System.out.println(dp.name+" "+dp.sequenceID+" "+dp.timestamp+" "+dp.type+" "+dp.getValue());
-		
-	}
+	public static DataPoint createDataPoint(String name, int timestamp, DataPointType type, double value) {
 
+		DataPoint dp = null;
+
+		switch (type) {
+		case DOUBLE:
+			DoubleDataPoint dp1 = new DoubleDataPoint(name, timestamp, value);
+			Bound<DoubleDataPoint> doubleDataPoint = new Bound <DoubleDataPoint> (dp1);			
+			dp=doubleDataPoint.getDataPoint();
+			break;
+		default:
+			System.out.println("Undefined type."); //throw exception
+			break;
+		}
+		return dp;
+	}
 }

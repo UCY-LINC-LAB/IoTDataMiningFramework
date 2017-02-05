@@ -11,16 +11,14 @@ import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
  * @author hamdy
  *
  */
-public abstract class TimeSeries {
+public interface TimeSeries <T> {
 	
-	static double median=0;
-	static int count=0;
+	public double getMedian();
 	
-	public double getMedian(){
-		return this.median;
-	}
-	
-	public abstract void addDataPoint(DataPoint dp);
+	public void addDataPoint(T dp);
+
+//	void addDataPoint(DataPoint dp);
+
 	
 		
 	

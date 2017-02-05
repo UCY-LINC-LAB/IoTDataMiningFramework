@@ -6,16 +6,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.Bound;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
+import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPointType;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleDataPoint;
 
-public class ReadCSV {
+public class ReadCSV <T extends DataPoint>{
 
 	public void readAll(String filename, String delimiter) {
 
 		BufferedReader br = null;
 		String line = "";
-		int count=0;
+		int count = 0;
 
 		try {
 			br = new BufferedReader(new FileReader(filename));
@@ -23,9 +25,9 @@ public class ReadCSV {
 				count++;
 				// use given delimiter as separator
 				String[] str = line.split(delimiter);
-				System.out.print("Line #"+count+": ");
-				for (int i=0;i<str.length;i++){
-					System.out.print(str[i]+" ");
+				System.out.print("Line #" + count + ": ");
+				for (int i = 0; i < str.length; i++) {
+					System.out.print(str[i] + " ");
 				}
 				System.out.println();
 			}
@@ -45,23 +47,23 @@ public class ReadCSV {
 		}
 
 	}
-	
-	public void readSome(String filename, String delimiter, int limit) {//range
+
+	public void readSome(String filename, String delimiter, int limit) {// range
 
 		BufferedReader br = null;
 		String line = "";
-		int count=0;
+		int count = 0;
 
 		try {
 			br = new BufferedReader(new FileReader(filename));
-			while (((line = br.readLine()) != null)&&limit!=0) {
+			while (((line = br.readLine()) != null) && limit != 0) {
 				limit--;
 				count++;
 				// use given delimiter as separator
 				String[] str = line.split(delimiter);
-				System.out.print("Line #"+count+": ");
-				for (int i=0;i<str.length;i++){
-					System.out.print(str[i]+" ");
+				System.out.print("Line #" + count + ": ");
+				for (int i = 0; i < str.length; i++) {
+					System.out.print(str[i] + " ");
 				}
 				System.out.println();
 			}
@@ -80,24 +82,24 @@ public class ReadCSV {
 		}
 
 	}
-	
+
 	public void getLine(String filename, String delimiter, int num) {
 
 		BufferedReader br = null;
 		String line = "";
-		System.out.print("Line #"+num+": ");
+		System.out.print("Line #" + num + ": ");
 
 		try {
 			br = new BufferedReader(new FileReader(filename));
 			while ((line = br.readLine()) != null) {
 				num--;
-				if (num==0)
-					break;								
+				if (num == 0)
+					break;
 			}
 			// use given delimiter as separator
-			String[] str = line.split(delimiter);			
-			for (int i=0;i<str.length;i++){
-				System.out.print(str[i]+" ");
+			String[] str = line.split(delimiter);
+			for (int i = 0; i < str.length; i++) {
+				System.out.print(str[i] + " ");
 			}
 
 		} catch (FileNotFoundException e) {
@@ -116,48 +118,54 @@ public class ReadCSV {
 
 	}
 
-	public ArrayList<DataPoint> readData(String filename, String delimiter, int column){
+	BufferedReader br = null;
+
+	public void openFile(String filename) throws FileNotFoundException {
+		this.br = new BufferedReader(new FileReader(filename));
+	}
 	
-		ArrayList <DataPoint> data=new ArrayList<DataPoint>();
-		BufferedReader br = null;
+	public void closeFile(){
+		if (br != null) {
+			try {
+				br.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public ArrayList<DoubleDataPoint> readData(String delimiter, int column, DataPointType type) {
+
+		ArrayList<DoubleDataPoint> data = new ArrayList<DoubleDataPoint>();
 		String line = "";
-		int count=0;
+		int count = 0;
 
 		try {
-			br = new BufferedReader(new FileReader(filename));
-			while ((line = br.readLine()) != null) {				
+			while ((line = br.readLine()) != null) {
 				// use given delimiter as separator
 				String[] str = line.split(delimiter);
-				DataPoint dp= new DoubleDataPoint("dataPoint"+count, "double", Double.parseDouble(str[0]), 1);
+				DoubleDataPoint dp = new DoubleDataPoint("dataPoint" + count, count, Double.parseDouble(str[0]));
+				Bound<DoubleDataPoint> doubleDataPoint = new Bound <DoubleDataPoint> (dp);
 				data.add(dp);
 				count++;
 			}
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
+		} 
 		return data;
 	}
-	
-	public static void main(String args[]){
-		ReadCSV csv= new ReadCSV();
-//		csv.readAll("test.csv", ",");
-//		csv.readSome("test.csv", ",",3);
-//		csv.getLine("test.csv", ",", 8);
-		ArrayList<DataPoint> res = csv.readData("test.csv", ",", 2);
-		for (DataPoint dataPoint : res) {
-			System.out.println(dataPoint.getName()+" "+(dataPoint.getValue().doubleValue()+1));
-		}
-	}
+
+//	public static void main(String args[]) {
+//		ReadCSV csv = new ReadCSV();
+//		// csv.readAll("test.csv", ",");
+//		// csv.readSome("test.csv", ",",3);
+//		// csv.getLine("test.csv", ",", 8);
+//		ArrayList<DataPoint> res = csv.readData("test.csv", ",", 2);
+//		for (DataPoint dataPoint : res) {
+//			System.out.println(dataPoint.getName() + " " + (dataPoint.getValue().doubleValue() + 1));
+//		}
+//	}
 
 }
