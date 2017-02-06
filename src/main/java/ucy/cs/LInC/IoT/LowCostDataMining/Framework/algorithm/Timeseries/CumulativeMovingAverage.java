@@ -1,4 +1,4 @@
-package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm;
+package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Timeseries;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
