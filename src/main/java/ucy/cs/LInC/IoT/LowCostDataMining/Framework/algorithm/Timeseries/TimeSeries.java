@@ -9,9 +9,9 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Timeseries;
  */
 public interface TimeSeries <T> {
 		
-	public double getMedian();
+	public double getAverage();
 	
-	public void addDataPoint(T dp);
+	public double addDataPoint(T dp);
 
 //	void addDataPoint(DataPoint dp);
 

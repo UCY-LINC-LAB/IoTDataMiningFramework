@@ -4,22 +4,23 @@ import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
 public class CumulativeMovingAverage<T extends DataPoint> implements TimeSeries<T> {
 	
-	double median;
+	double avg;
 	int count;
 
 	public CumulativeMovingAverage() {
 		this.count = 0;
-		this.median = 0;
+		this.avg = 0;
 	}
 
-	public double getMedian() {
-		return this.median;
+	public double getAverage() {
+		return this.avg;
 	}
 
-	public void addDataPoint(T dp) {
+	public double addDataPoint(T dp) {
 		// TODO Auto-generated method stub
 		this.count++;
-		this.median = this.median + ((Double)dp.getValue() - this.median) / this.count;
+		this.avg = this.avg + ((Double)dp.getValue() - this.avg) / this.count;
+		return this.avg;
 	}
 
 }
