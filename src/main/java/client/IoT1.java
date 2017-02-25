@@ -25,51 +25,51 @@ public class IoT1 {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		DecisionTree dt = new DecisionTree();
-		Algorithm algorithm=null;
+		DecisionTree<String> dt = new DecisionTree();
+		ID3Algorithm algorithm=null;
 		dt.setAlgorithm(algorithm);
 		dt.setFeatures(new String[]{"Outlook",  "Temperature", "Humidity", "Wind"});
 		try {
-//			dt.addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Sunny")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.FALSE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Sunny")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.FALSE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Overcast")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.FALSE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.FALSE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Overcast")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Sunny")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.FALSE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Sunny")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Sunny")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Overcast")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Overcast")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
-//            .addExample(new StringDataPoint[]{(new StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")), (new StringDataPoint("Temperature",1,DataPointType.STRING,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.FALSE);
+//			dt.addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Sunny")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.FALSE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Sunny")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.FALSE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Overcast")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Rain")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.FALSE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Rain")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Rain")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.FALSE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Overcast")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Sunny")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.FALSE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Sunny")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Cool")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Rain")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Sunny")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Overcast")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Overcast")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Hot")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"Normal")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Weak"))}, Categories.TRUE)
+//            .addExample(new DoubleDataPoint[]{(new DoubleDataPoint("Outlook",1,DataPointType.DOUBLE,"Rain")), (new DoubleDataPoint("Temperature",1,DataPointType.DOUBLE,"Mild")), (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")), (new StringDataPoint("Wind",1,DataPointType.STRING,"Strong"))}, Categories.FALSE);
 			
 			
-			dt.addExample(   new Double[]{0.1, 0.4, 0.7, 0.9}, Categories.FALSE)
-			.addExample(   new Double[]{0.1, 0.4, 0.7, 1.0}, Categories.FALSE)
-			.addExample(   new Double[]{0.2, 0.4, 0.7, 0.9}, Categories.TRUE)
-			.addExample(   new Double[]{0.3, 0.5, 0.7, 0.9}, Categories.KATI)
-			.addExample(   new Double[]{0.3, 0.6, 0.8, 0.9}, Categories.KATI)
-			.addExample(   new Double[]{0.3, 0.6, 0.8, 1.0}, Categories.KATI)
-			.addExample(   new Double[]{0.2, 0.6, 0.8, 1.0}, Categories.TRUE)
-			.addExample(   new Double[]{0.1, 0.5, 0.7, 0.9}, Categories.FALSE)
-			.addExample(   new Double[]{0.1, 0.6, 0.8, 0.9}, Categories.TRUE)
-			.addExample(   new Double[]{0.3, 0.5, 0.8, 0.9}, Categories.KATI)
-			.addExample(   new Double[]{0.1, 0.5, 0.8, 1.0}, Categories.TRUE)
-			.addExample(   new Double[]{0.2, 0.5, 0.7, 1.0}, Categories.TRUE)
-			.addExample(   new Double[]{0.2, 0.4, 0.8, 0.9}, Categories.TRUE)
-			.addExample(   new Double[]{0.3, 0.5, 0.7, 1.0}, Categories.KATI);
+			dt.addExample(   new String[]{"0.1", "0.4", "0.7", "0.9"}, Categories.FALSE)
+			.addExample(   new String[]{"0.1", "0.4", "0.7", "1.0"}, Categories.FALSE)
+			.addExample(   new String[]{"0.2", "0.4", "0.7", "0.9"}, Categories.TRUE)
+			.addExample(   new String[]{"0.3", "0.5", "0.7", "0.9"}, Categories.KATI)
+			.addExample(   new String[]{"0.3", "0.6", "0.8", "0.9"}, Categories.KATI)
+			.addExample(   new String[]{"0.3", "0.6", "0.8", "1.0"}, Categories.KATI)
+			.addExample(   new String[]{"0.2", "0.6", "0.8", "1.0"}, Categories.TRUE)
+			.addExample(   new String[]{"0.1", "0.5", "0.7", "0.9"}, Categories.FALSE)
+			.addExample(   new String[]{"0.1", "0.6", "0.8", "0.9"}, Categories.TRUE)
+			.addExample(   new String[]{"0.3", "0.5", "0.8", "0.9"}, Categories.KATI)
+			.addExample(   new String[]{"0.1", "0.5", "0.8", "1.0"}, Categories.TRUE)
+			.addExample(   new String[]{"0.2", "0.5", "0.7", "1.0"}, Categories.TRUE)
+			.addExample(   new String[]{"0.2", "0.4", "0.8", "0.9"}, Categories.TRUE)
+			.addExample(   new String[]{"0.3", "0.5", "0.7", "1.0"}, Categories.KATI);
 		} catch (UnknownDecisionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println(dt.toString());
-		Map<String, Double> case1 = new HashMap<String, Double>();
-		case1.put("Outlook", 0.3);
-	    case1.put("Temperature", 0.4);
-	    case1.put("Humidity", 0.7);
-	    case1.put("Wind", 1.0);
+		Map<String, String> case1 = new HashMap<String, String>();
+		case1.put("Outlook", "0.3");
+	    case1.put("Temperature", "0.4");
+	    case1.put("Humidity", "0.7");
+	    case1.put("Wind", "1.0");
 //	    case1.put("Outlook", (new StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")));
 //	    case1.put("Temperature", (new StringDataPoint("Temperature",1,DataPointType.STRING,"Hot")));
 //	    case1.put("Humidity", (new StringDataPoint("Humidity",1,DataPointType.STRING,"High")));

@@ -7,7 +7,7 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Classification.Dec
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
 public class UnknownDecisionException extends Exception {
-  public UnknownDecisionException(String attribute, Double featureValues) {
+  public <T> UnknownDecisionException(String attribute, T featureValues) {
     super();
   }
 }

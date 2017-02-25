@@ -10,7 +10,7 @@ import java.util.Map.Entry;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
 
-public class Feature {
+public class Feature <T>{
   /**
    * Indicates if this Feature yields a classification (true) or has child 
    * decisions that point to further Features (false).
@@ -59,41 +59,41 @@ public class Feature {
     return classification;
   }
 
-  public Categories apply(Map<String, Double> data) throws BadDecisionException {
+  public Categories apply(Map<String, T> case1) throws BadDecisionException {
     if ( isLeaf() )
       return getClassification();
 
-    Feature nextFeature = decisions.apply(data.get(featureName));
-    return nextFeature.apply(data);
+    Feature nextFeature = decisions.apply(case1.get(featureName));
+    return nextFeature.apply(case1);
   }
 
-  public void addDecision(Double decisionName, Feature feature) {
+  public void addDecision(T decisionName, Feature feature) {
     assert ( !leaf );
 
     decisions.put(decisionName, feature);
   }
 
   public String toString() {
-    StringBuffer b = new StringBuffer();
+//    StringBuffer b = new StringBuffer();
+    
+//    for ( Entry<T, Feature> e : (Entry<T, Feature>) decisions.getMap().entrySet() ) {
+//      b.append(getName());
+//      b.append(" -> ");
+//      if ( e.getValue().isLeaf() )
+//        b.append(e.getValue().getClassification());
+//      else
+//        b.append(e.getValue().getName());
+//      b.append(" [label=\"");
+//      b.append(e.getKey());
+//      b.append("\"]\n");
+//
+//      b.append(e.getValue().toString());
+//    }
 
-    for ( Entry<Double, Feature> e : decisions.getMap().entrySet() ) {
-      b.append(getName());
-      b.append(" -> ");
-      if ( e.getValue().isLeaf() )
-        b.append(e.getValue().getClassification());
-      else
-        b.append(e.getValue().getName());
-      b.append(" [label=\"");
-      b.append(e.getKey());
-      b.append("\"]\n");
-
-      b.append(e.getValue().toString());
-    }
-
-    return b.toString();
+    return decisions.toString(this);
   }
 
-  public Map<Double, Feature> getDecisions() {
-    return decisions.getMap();
+  public Map<T, Feature> getDecisions() {
+    return (Map<T, Feature>) decisions.getMap();
   }
 }

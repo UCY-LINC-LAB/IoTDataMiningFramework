@@ -8,7 +8,7 @@ import java.util.*;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
-public class DecisionTree {
+public class DecisionTree <T>{
   /**
    * Contains the set of available Features.
    */
@@ -17,7 +17,7 @@ public class DecisionTree {
   /**
    * Maps a Feature name to a set of possible decisions for that Feature.
    */
-  private Map<String, Set<Double>> decisions;
+  private Map<String, Set<T>> decisions;
   private boolean decisionsSpecified;
 
   /**
@@ -26,7 +26,7 @@ public class DecisionTree {
    * The 'Features' and 'decisions' member variables should be updated
    * prior to adding examples that refer to new Features or decisions.
    */
-  private Examples examples;
+  private Examples<T> examples;
 
   /**
    * Indicates if the provided data has been processed into a decision tree.
@@ -43,24 +43,24 @@ public class DecisionTree {
    * the rootFeature yields a boolean classification.
    *
    */
-  private Feature rootFeature;
+  private Feature<T> rootFeature;
 
-  private Algorithm algorithm;
+  private ID3Algorithm<T> algorithm;
 
   public DecisionTree() {
     algorithm = null;
-    examples = new Examples();
+    examples = new Examples<T>();
     features = new LinkedHashSet<String>();
-    decisions = new HashMap<String, Set<Double> >();
+    decisions = new HashMap<String, Set<T> >();
     decisionsSpecified = false;
   }
 
   private void setDefaultAlgorithm() {
     if ( algorithm == null )
-      setAlgorithm(new ID3Algorithm(examples));
+      setAlgorithm(new ID3Algorithm<T>(examples));
   }
 
-  public void setAlgorithm(Algorithm algorithm) {
+  public void setAlgorithm(ID3Algorithm<T> algorithm) {
     this.algorithm = algorithm;
   }
 
@@ -71,7 +71,7 @@ public class DecisionTree {
    * determine which values correspond with which names.
    *
    */
-  public DecisionTree setFeatures(String[] featureNames) {
+  public DecisionTree<T> setFeatures(String[] featureNames) {
     compiled = false;
 
     decisions.clear();
@@ -90,7 +90,7 @@ public class DecisionTree {
    * Set categories
    * 
    */
-  public DecisionTree setDecisions(String featureName, Double[] decisions) {
+  public DecisionTree<T> setDecisions(String featureName, T[] decisions) {
     if ( !features.contains(featureName) ) {
       // TODO some kind of warning or something
       return this;
@@ -99,9 +99,9 @@ public class DecisionTree {
     compiled = false;
     decisionsSpecified = true;
 
-    Set<Double> decisionsSet = new HashSet<Double>();
+    Set<T> decisionsSet = new HashSet<T>();
     for ( int i = 0 ; i < decisions.length ; i++ )
-      decisionsSet.add(decisions[i]);
+      decisionsSet.add((T)decisions[i]);
 
     this.decisions.put(featureName, decisionsSet);
 
@@ -110,7 +110,7 @@ public class DecisionTree {
 
   /**
    */
-  public DecisionTree addExample(Double[] featureValues, Categories classification) throws UnknownDecisionException {
+  public DecisionTree<T> addExample(T[] featureValues, Categories classification) throws UnknownDecisionException {
     String[] features = this.features.toArray(new String[0]);
 
     if ( decisionsSpecified )
@@ -126,7 +126,7 @@ public class DecisionTree {
     return this;
   }
 
-  public DecisionTree addExample(Map<String, Double> features, Categories classification) throws UnknownDecisionException {
+  public DecisionTree<T> addExample(Map<String, T> features, Categories classification) throws UnknownDecisionException {
     compiled = false;
 
     examples.add(features, classification);
@@ -134,13 +134,13 @@ public class DecisionTree {
     return this;
   }
 
-  public Categories apply(Map<String, Double> case1) throws BadDecisionException {
+  public Categories apply(Map<String, T> case1) throws BadDecisionException {
     compile();
 
     return rootFeature.apply(case1);
   }
 
-  private Feature compileWalk(Feature current, Map<String, Double> chosenFeatures, Set<String> usedFeatures) {
+  private Feature<T> compileWalk(Feature<T> current, Map<String, T> chosenFeatures, Set<String> usedFeatures) {
     // if the current Feature is a leaf, then there are no decisions and thus no
     // further Features to find.
     if ( current.isLeaf() )
@@ -152,7 +152,7 @@ public class DecisionTree {
     // remove this Feature from all further consideration
     usedFeatures.add(featureName);
 
-    for ( Double decisionName : decisions.get(featureName) ) {
+    for ( T decisionName : decisions.get(featureName) ) {
       // overwrite the feature decision for each value considered
       chosenFeatures.put(featureName, decisionName);
 
@@ -177,7 +177,7 @@ public class DecisionTree {
     // if no algorithm is set beforehand, select the default one.
     setDefaultAlgorithm();
 
-    Map<String, Double> chosenFeatures = new HashMap<String, Double>();
+    Map<String, T> chosenFeatures = new HashMap<String, T>();
     Set<String> usedFeatures = new HashSet<String>();
 
     if ( !decisionsSpecified )
@@ -200,7 +200,7 @@ public class DecisionTree {
       return "";
   }
 
-  public Feature getRoot() {
+  public Feature<T> getRoot() {
     return rootFeature;
   }
 }

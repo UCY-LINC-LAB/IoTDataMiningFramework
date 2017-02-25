@@ -9,14 +9,14 @@ import java.util.Map.Entry;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
-class Examples {
-	class Example {
-		private Map<String, Double> values;
+class Examples <T>{
+	class Example <T>{
+		private Map<String, T> values;
 		private Categories classifier;
 
-		public Example(String[] featureNames, Double[] featureValues, Categories classifier) {
-			assert (featureNames.length == featureValues.length);
-			values = new HashMap<String, Double>();
+		public Example(String[] featureNames, T[] featureValues, Categories classifier) {
+			assert (featureNames.length == featureValues.length);			
+			values = new HashMap<String, T>();
 
 			for (int i = 0; i < featureNames.length; i++) {
 				values.put(featureNames[i], featureValues[i]);
@@ -25,7 +25,7 @@ class Examples {
 			this.classifier = classifier;
 		}
 
-		public Example(Map<String, Double> features, Categories classifier) {
+		public Example(Map<String, T> features, Categories classifier) {
 			this.classifier = classifier;
 			this.values = features;
 		}
@@ -34,7 +34,7 @@ class Examples {
 			return values.keySet();
 		}
 
-		public Double getFeatureValue(String feature) {
+		public T getFeatureValue(String feature) {
 			return values.get(feature);
 		}
 
@@ -49,11 +49,11 @@ class Examples {
 		examples = new LinkedList<Example>();
 	}
 
-	public void add(String[] featureNames, Double[] featureValues, Categories classifier) {
+	public void add(String[] featureNames, T[] featureValues, Categories classifier) {
 		examples.add(new Example(featureNames, featureValues, classifier));
 	}
 
-	public void add(Map<String, Double> features, Categories classifier) {
+	public void add(Map<String, T> features, Categories classifier) {
 		examples.add(new Example(features, classifier));
 	}
 
@@ -61,10 +61,10 @@ class Examples {
 	 * Returns the number of examples where the Feature has the specified
 	 * 'decision' value
 	 */
-	int countDecisions(String feature, Double decision) {
+	int countDecisions(String feature, T decision) {
 		int count = 0;
 
-		for (Example e : examples) {
+		for (Example<T> e : examples) {
 			if (e.getFeatureValue(feature).equals(decision))
 				count++;
 		}
@@ -76,8 +76,8 @@ class Examples {
 	 * Returns a map from each Feature name to a set of all values used in the
 	 * examples for that Feature.
 	 */
-	public Map<String, Set<Double>> extractDecisions() {
-		Map<String, Set<Double>> decisions = new HashMap<String, Set<Double>>();
+	public Map<String, Set<T>> extractDecisions() {
+		Map<String, Set<T>> decisions = new HashMap<String, Set<T>>();
 
 		for (String feature : extractFeatures()) {
 			decisions.put(feature, extractDecisions(feature));
@@ -86,34 +86,34 @@ class Examples {
 		return decisions;
 	}
 
-	public int countNegative(String feature, Double decision, Map<String, Double> features) {
+	public int countNegative(String feature, T decision, Map<String, T> features) {
 		return countClassifier(Categories.FALSE, feature, decision, features);
 	}
 
-	public int countPositive(String feature, Double decision, Map<String, Double> features) {
+	public int countPositive(String feature, T decision, Map<String, T> features) {
 		return countClassifier(Categories.TRUE, feature, decision, features);
 	}
 
-	public int countNegative(Map<String, Double> features) {
+	public int countNegative(Map<String, T> features) {
 		return countClassifier(Categories.FALSE, features);
 	}
 
-	public int countPositive(Map<String, Double> chosenFeatures) {
+	public int countPositive(Map<String, T> chosenFeatures) {
 		return countClassifier(Categories.TRUE, chosenFeatures);
 	}
 
-	public int count(String feature, Double decision, Map<String, Double> specifiedFeatures) {
+	public int count(String feature, T decision, Map<String, T> specifiedFeatures) {
 		specifiedFeatures = new HashMap(specifiedFeatures);
 		specifiedFeatures.put(feature, decision);
 
 		return count(specifiedFeatures);
 	}
 
-	public int count(Map<String, Double> specifiedFeatures) {
+	public int count(Map<String, T> specifiedFeatures) {
 		int count = 0;
 
 		nextExample: for (Example e : examples) {
-			for (Entry<String, Double> feature : specifiedFeatures.entrySet())
+			for (Entry<String, T> feature : specifiedFeatures.entrySet())
 				if (!(e.getFeatureValue(feature.getKey()).equals(feature.getValue())))
 					continue nextExample;
 
@@ -124,11 +124,11 @@ class Examples {
 		return count;
 	}
 
-	public int countClassifier(Categories classifier, Map<String, Double> features) {
+	public int countClassifier(Categories classifier, Map<String, T> features) {
 		int count = 0;
 
 		nextExample: for (Example e : examples) {
-			for (Entry<String, Double> feature : features.entrySet())
+			for (Entry<String, T> feature : features.entrySet())
 				if (!(e.getFeatureValue(feature.getKey()).equals(feature.getValue())))
 					continue nextExample;
 
@@ -142,7 +142,7 @@ class Examples {
 		return count;
 	}
 
-	public int countClassifier(Categories classifier, String feature, Double decision, Map<String, Double> features) {
+	public int countClassifier(Categories classifier, String feature, T decision, Map<String, T> features) {
 		features = new HashMap(features);
 		features.put(feature, decision);
 
@@ -162,18 +162,18 @@ class Examples {
 	public Set<String> extractFeatures() {
 		Set<String> features = new HashSet<String>();
 
-		for (Example e : examples) {
+		for (Example<T> e : examples) {
 			features.addAll(e.getFeatures());
 		}
 
 		return features;
 	}
 
-	private Set<Double> extractDecisions(String feature) {
-		Set<Double> decisions = new HashSet<Double>();
+	private Set<T> extractDecisions(String feature) {
+		Set<T> decisions = new HashSet<T>();
 
 		for (Example e : examples) {
-			decisions.add(e.getFeatureValue(feature));
+			decisions.add((T)e.getFeatureValue(feature));
 		}
 
 		return decisions;

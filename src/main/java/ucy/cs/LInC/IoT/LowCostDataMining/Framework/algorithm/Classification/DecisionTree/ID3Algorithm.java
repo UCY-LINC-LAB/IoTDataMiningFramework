@@ -8,37 +8,38 @@ import java.util.*;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 
-public class ID3Algorithm implements Algorithm {
+public class ID3Algorithm<T> implements Algorithm<T> {
 	// final Logger logger = LoggerFactory.getLogger(ID3Algorithm.class);
-	private Examples examples;
+	private Examples<T> examples;
 
-	public ID3Algorithm(Examples examples) {
+	public ID3Algorithm(Examples<T> examples) {
 		this.examples = examples;
 	}
 
 	/**
 	 * Returns the next Feature to be chosen.
 	 *
-	 * chosenFeatures represents the decision path from the root Feature to the feature
-	 * under consideration. usedFeatures is the set of all Features that have been
-	 * incorporated into the tree prior to this call to nextFeature(), even if the
-	 * Features were not used in the path to the feature under consideration.
+	 * chosenFeatures represents the decision path from the root Feature to the
+	 * feature under consideration. usedFeatures is the set of all Features that
+	 * have been incorporated into the tree prior to this call to nextFeature(),
+	 * even if the Features were not used in the path to the feature under
+	 * consideration.
 	 *
 	 * Results are undefined if examples.count() == 0.
 	 */
-	public Feature nextFeature(Map<String, Double> chosenFeatures, Set<String> usedFeatures) {
+	public Feature<T> nextFeature(Map<String, T> chosenFeatures, Set<String> usedFeatures) {
 		double currentGain = 0.0, bestGain = 0.0;
 		String bestFeature = "";
 
 		/*
-		 * If there are no positive examples for the already chosen Features, then
-		 * return a false classifier leaf. If no negative examples, then return
-		 * a true classifier leaf.
+		 * If there are no positive examples for the already chosen Features,
+		 * then return a false classifier leaf. If no negative examples, then
+		 * return a true classifier leaf.
 		 */
 		if (examples.countPositive(chosenFeatures) == 0)
-			return new Feature(Categories.FALSE);
+			return new Feature<T>(Categories.FALSE);
 		else if (examples.countNegative(chosenFeatures) == 0)
-			return new Feature(Categories.TRUE);
+			return new Feature<T>(Categories.TRUE);
 
 		// if (examples.countClassifier(Categories.FALSE, chosenFeatures)==0){
 		//
@@ -46,10 +47,12 @@ public class ID3Algorithm implements Algorithm {
 
 		// logger.debug("Choosing Feature out of {} remaining Features.",
 		// remainingFeatures(usedFeatures).size());
-		// logger.debug("Already chosen Features/decisions are {}.", chosenFeatures);
+		// logger.debug("Already chosen Features/decisions are {}.",
+		// chosenFeatures);
 
 		for (String feature : remainingFeatures(usedFeatures)) {
-			// for each remaining Feature, determine the information gain of using
+			// for each remaining Feature, determine the information gain of
+			// using
 			// it
 			// to choose among the examples selected by the chosenFeatures
 			// if none give any information gain, return a leaf Feature,
@@ -69,14 +72,14 @@ public class ID3Algorithm implements Algorithm {
 		// would be greater than 0.
 		if (bestGain == 0.0) {
 			if (examples.countPositive(chosenFeatures) > 0)
-				return new Feature(Categories.TRUE);
+				return new Feature<T>(Categories.TRUE);
 			else
-				return new Feature(Categories.FALSE);
+				return new Feature<T>(Categories.FALSE);
 			// logger.debug("Creating new leaf Feature with classifier {}.",
 			// classifier);
 		} else {
 			// logger.debug("Creating new non-leaf Feature {}.", bestFeature);
-			return new Feature(bestFeature);
+			return new Feature<T>(bestFeature);
 		}
 	}
 
@@ -86,15 +89,15 @@ public class ID3Algorithm implements Algorithm {
 		return result;
 	}
 
-	private double entropy(Map<String, Double> specifiedFeatures) {
+	private double entropy(Map<String, T> chosenFeatures) {
 		double totalExamples = examples.count();
-		double positiveExamples = examples.countPositive(specifiedFeatures);
-		double negativeExamples = examples.countNegative(specifiedFeatures);
+		double positiveExamples = examples.countPositive(chosenFeatures);
+		double negativeExamples = examples.countNegative(chosenFeatures);
 
 		return -nlog2(positiveExamples / totalExamples) - nlog2(negativeExamples / totalExamples);
 	}
 
-	private double entropy(String feature, Double decision, Map<String, Double> specifiedFeatures) {
+	private double entropy(String feature, T decision, Map<String, T> specifiedFeatures) {
 		double totalExamples = examples.count(feature, decision, specifiedFeatures);
 		double positiveExamples = examples.countPositive(feature, decision, specifiedFeatures);
 		double negativeExamples = examples.countNegative(feature, decision, specifiedFeatures);
@@ -102,16 +105,16 @@ public class ID3Algorithm implements Algorithm {
 		return -nlog2(positiveExamples / totalExamples) - nlog2(negativeExamples / totalExamples);
 	}
 
-	private double informationGain(String feature, Map<String, Double> chosenFeatures) {
+	private double informationGain(String feature, Map<String, T> chosenFeatures) {
 		double sum = entropy(chosenFeatures);
 		double examplesCount = examples.count(chosenFeatures);
 
 		if (examplesCount == 0)
 			return sum;
 
-		Map<String, Set<Double>> decisions = examples.extractDecisions();
+		Map<String, Set<T>> decisions = examples.extractDecisions();
 
-		for (Double decision : decisions.get(feature)) {
+		for (T decision : decisions.get(feature)) {
 			double entropyPart = entropy(feature, decision, chosenFeatures);
 			double decisionCount = examples.countDecisions(feature, decision);
 
