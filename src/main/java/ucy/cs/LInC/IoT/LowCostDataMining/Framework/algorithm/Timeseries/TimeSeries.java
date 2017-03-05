@@ -12,6 +12,8 @@ public interface TimeSeries <T> {
 	public double getAverage();
 	
 	public double addDataPoint(T dp);
+	
+	public void reset();
 
 //	void addDataPoint(DataPoint dp);
 

@@ -19,7 +19,7 @@ public class DoubleDataPoint extends DataPoint {
 
 	@Override
 	protected void construct() {
-		System.out.println("Building Double");
+//		System.out.println("Building Double");
 		// add accessories
 	}
 	

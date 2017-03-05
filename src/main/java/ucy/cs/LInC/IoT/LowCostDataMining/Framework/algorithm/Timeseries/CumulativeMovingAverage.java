@@ -22,5 +22,10 @@ public class CumulativeMovingAverage<T extends DataPoint> implements TimeSeries<
 		this.avg = this.avg + ((Double)dp.getValue() - this.avg) / this.count;
 		return this.avg;
 	}
+	
+	public void reset() {
+		this.avg = 0.0;
+		this.count = 0;
+	}
 
 }

@@ -54,5 +54,13 @@ public class PEWMA<T extends DataPoint> extends EWMA<T> {
 	public double calculateSigma(T dp){
 		return Math.sqrt(calculateEWMA(this.a, this.avg, (Double) dp.getValue()) + Math.pow(calculateEWMA(this.a, this.avg, Math.pow((Double) dp.getValue(), 2)), 2));
 	}
+	
+	@Override
+	public void reset() {
+		this.avg = 0.0;
+		this.prob=0.0;
+		this.z=0.0;
+		this.sigma=0.0;
+	}
 
 }

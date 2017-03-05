@@ -16,7 +16,7 @@ public class SimpleMovingAverage<T extends DataPoint> implements TimeSeries<T> {
 	double avg;
 	int count;
 	int windowSize;
-	DataPoint outOfScope;
+//	DataPoint outOfScope;
 	ArrayList<DataPoint> window = new ArrayList<DataPoint>();
 
 	public SimpleMovingAverage(int windowSize) {
@@ -43,8 +43,13 @@ public class SimpleMovingAverage<T extends DataPoint> implements TimeSeries<T> {
 			window.add(dp);
 			this.avg = this.avg + (Double) dp.getValue() / this.count;
 		}
-		return this.avg;
-			
+		return this.avg;	
+	}
+	
+	public void reset() {
+		this.avg = 0.0;
+		this.count = 0;	
+		this.window=new ArrayList<DataPoint>();
 	}
 
 }
