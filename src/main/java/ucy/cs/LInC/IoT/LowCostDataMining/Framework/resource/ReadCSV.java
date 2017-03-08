@@ -144,7 +144,7 @@ public class ReadCSV <T extends DataPoint>{
 			while ((line = br.readLine()) != null) {
 				// use given delimiter as separator
 				String[] str = line.split(delimiter);
-				DoubleDataPoint dp = new DoubleDataPoint("dataPoint" + count, count, Double.parseDouble(str[0]));
+				DoubleDataPoint dp = new DoubleDataPoint("dataPoint" + count, count, Double.parseDouble(str[column]));
 				Bound<DoubleDataPoint> doubleDataPoint = new Bound <DoubleDataPoint> (dp);
 				data.add(dp);
 				count++;
