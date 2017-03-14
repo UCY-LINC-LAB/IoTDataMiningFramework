@@ -37,9 +37,9 @@ public class ID3Algorithm<T> implements Algorithm<T> {
 		 * return a true classifier leaf.
 		 */
 		if (examples.countPositive(chosenFeatures) == 0)
-			return new Feature<T>(Categories.FALSE);
+			return new Feature<T>(Categories.NONE);
 		else if (examples.countNegative(chosenFeatures) == 0)
-			return new Feature<T>(Categories.TRUE);
+			return new Feature<T>(Categories.ZONE1);
 
 		// if (examples.countClassifier(Categories.FALSE, chosenFeatures)==0){
 		//
@@ -72,9 +72,9 @@ public class ID3Algorithm<T> implements Algorithm<T> {
 		// would be greater than 0.
 		if (bestGain == 0.0) {
 			if (examples.countPositive(chosenFeatures) > 0)
-				return new Feature<T>(Categories.TRUE);
+				return new Feature<T>(Categories.ZONE1);
 			else
-				return new Feature<T>(Categories.FALSE);
+				return new Feature<T>(Categories.NONE);
 			// logger.debug("Creating new leaf Feature with classifier {}.",
 			// classifier);
 		} else {

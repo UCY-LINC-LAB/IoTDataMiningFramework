@@ -10,6 +10,7 @@ import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.Bound;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPointType;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleDataPoint;
+import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleVector;
 
 public class ReadCSV <T extends DataPoint>{
 
@@ -146,6 +147,33 @@ public class ReadCSV <T extends DataPoint>{
 				String[] str = line.split(delimiter);
 				DoubleDataPoint dp = new DoubleDataPoint("dataPoint" + count, count, Double.parseDouble(str[column]));
 				Bound<DoubleDataPoint> doubleDataPoint = new Bound <DoubleDataPoint> (dp);
+				data.add(dp);
+				count++;
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		return data;
+	}
+	
+	public ArrayList<DoubleVector> readData(String delimiter, int[] columns, DataPointType type) {
+
+		ArrayList<DoubleVector> data = new ArrayList<DoubleVector>();
+		
+		String line = "";
+		int count = 0;
+		double[] colData = new double[columns.length];
+		try {
+			while ((line = br.readLine()) != null) {
+				// use given delimiter as separator
+				String[] str = line.split(delimiter);
+				for (int i=0;i<columns.length;i++){
+					colData[i]=Double.parseDouble(str[columns[i]]);
+				}
+				DoubleVector dp = new DoubleVector("dataPoint" + count, count, colData);
+				Bound<DoubleVector> doubleDataPoint = new Bound <DoubleVector> (dp);
 				data.add(dp);
 				count++;
 			}

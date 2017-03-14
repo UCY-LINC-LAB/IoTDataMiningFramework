@@ -32,12 +32,10 @@ public class PEWMA<T extends DataPoint> extends EWMA<T> {
 	public double addDataPoint(T dp) {
 		// TODO Auto-generated method stub
 
-		
 		this.z=((Double)dp.getValue()-this.avg)/this.sigma;
 		this.prob=probability(this.z);
 		this.a = this.a * (1 - this.b * this.prob);
 		this.avg=calculateEWMA(this.a*(1-this.b*this.prob),this.avg,(Double)dp.getValue());
-		
 //		this.s1 = calculateEWMA(this.a, this.avg, (Double) dp.getValue());
 //		this.s2 = calculateEWMA(this.a, this.avg, Math.pow((Double) dp.getValue(), 2));
 //		this.sigma = Math.sqrt(this.s2 + Math.pow(this.s1, 2));

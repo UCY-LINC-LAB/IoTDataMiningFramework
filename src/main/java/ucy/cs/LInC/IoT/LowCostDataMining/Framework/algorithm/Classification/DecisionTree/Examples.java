@@ -87,19 +87,19 @@ class Examples <T>{
 	}
 
 	public int countNegative(String feature, T decision, Map<String, T> features) {
-		return countClassifier(Categories.FALSE, feature, decision, features);
+		return countClassifier(Categories.NONE, feature, decision, features);
 	}
 
 	public int countPositive(String feature, T decision, Map<String, T> features) {
-		return countClassifier(Categories.TRUE, feature, decision, features);
+		return countClassifier(Categories.ZONE1, feature, decision, features);
 	}
 
 	public int countNegative(Map<String, T> features) {
-		return countClassifier(Categories.FALSE, features);
+		return countClassifier(Categories.NONE, features);
 	}
 
 	public int countPositive(Map<String, T> chosenFeatures) {
-		return countClassifier(Categories.TRUE, chosenFeatures);
+		return countClassifier(Categories.ZONE1, chosenFeatures);
 	}
 
 	public int count(String feature, T decision, Map<String, T> specifiedFeatures) {

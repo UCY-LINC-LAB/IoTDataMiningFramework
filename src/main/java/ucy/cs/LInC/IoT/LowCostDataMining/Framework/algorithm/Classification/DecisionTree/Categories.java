@@ -8,5 +8,5 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Classification.Dec
  *
  */
 public enum Categories {
-	TRUE,FALSE,KATI
+	ZONE1,NONE
 }

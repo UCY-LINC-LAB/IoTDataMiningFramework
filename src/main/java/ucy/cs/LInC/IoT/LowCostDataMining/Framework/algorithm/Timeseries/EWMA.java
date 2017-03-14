@@ -37,9 +37,7 @@ public class EWMA<T extends DataPoint> implements TimeSeries<T> {
 	}
 
 	public double calculateEWMA(double a, double avg, double value) {
-
 		return a * avg + (1 - a) * value;
-
 	}
 
 	public void reset() {
