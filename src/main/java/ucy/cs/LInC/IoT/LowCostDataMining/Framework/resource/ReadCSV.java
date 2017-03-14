@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.Bound;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
@@ -158,13 +159,14 @@ public class ReadCSV <T extends DataPoint>{
 		return data;
 	}
 	
-	public ArrayList<DoubleVector> readData(String delimiter, int[] columns, DataPointType type) {
+	public ArrayList<String> readData(ArrayList<DoubleVector> data, String delimiter, int[] columns, int lblCol, DataPointType type) {
 
-		ArrayList<DoubleVector> data = new ArrayList<DoubleVector>();
+//		HashMap<String,DoubleVector> data = new HashMap<String,DoubleVector>();
 		
 		String line = "";
 		int count = 0;
 		double[] colData = new double[columns.length];
+		ArrayList<String> lbls = new ArrayList<String>();
 		try {
 			while ((line = br.readLine()) != null) {
 				// use given delimiter as separator
@@ -172,9 +174,11 @@ public class ReadCSV <T extends DataPoint>{
 				for (int i=0;i<columns.length;i++){
 					colData[i]=Double.parseDouble(str[columns[i]]);
 				}
+				
 				DoubleVector dp = new DoubleVector("dataPoint" + count, count, colData);
 				Bound<DoubleVector> doubleDataPoint = new Bound <DoubleVector> (dp);
 				data.add(dp);
+				lbls.add(str[lblCol]);
 				count++;
 			}
 		} catch (FileNotFoundException e) {
@@ -182,7 +186,7 @@ public class ReadCSV <T extends DataPoint>{
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-		return data;
+		return lbls;
 	}
 
 //	public static void main(String args[]) {

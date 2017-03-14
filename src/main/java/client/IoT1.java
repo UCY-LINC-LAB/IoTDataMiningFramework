@@ -31,21 +31,27 @@ public class IoT1 {
 		dt.setAlgorithm(algorithm);
 		dt.setFeatures(new String[] { "Heart", "Calories" });
 		try {
-			int[] columns={1,2,4};
-			 ArrayList<DoubleVector> data = new ArrayList<DoubleVector>();
-			 ReadCSV<DoubleDataPoint> reader = new ReadCSV<DoubleDataPoint>();
-			 try {
-			 reader.openFile("test.csv");
-			 } catch (FileNotFoundException e) {
-			 e.printStackTrace();
-			 }
-			 data = reader.readData(",", columns, DataPointType.DOUBLE);
-			 for (int i=0;i<data.size();i++){
-				 for (int j=0;j<data.get(i).getValue().length;j++){
-					 System.out.print(data.get(i).getValue()[j]+" - ");
-				 }
-				 System.out.println();
-			 }
+			int[] columns = { 1, 2 };
+			int lbl = 4;
+			ArrayList<DoubleVector> data = new ArrayList<DoubleVector>();
+			ArrayList<String> classes = new ArrayList<String>();
+			ReadCSV<DoubleDataPoint> reader = new ReadCSV<DoubleDataPoint>();
+			try {
+				reader.openFile("test.csv");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			classes = reader.readData(data, ",", columns, lbl, DataPointType.DOUBLE);
+			for (int i = 0; i < data.size(); i++) {
+				for (int j = 0; j < data.get(i).getValue().length; j++) {
+					if (classes.get(i).equals("IN_DEFAULT_ZONE_1")){
+						dt.addExample(data.get(i).getValue(), Categories.ZONE1);
+					} else if (classes.get(i).equals("null")){
+						dt.addExample(data.get(i).getValue(), Categories.NONE);
+					} else
+						System.err.println("Something went wrong!");
+				}
+			}
 			// dt.addExample(new Double[] { 0.1, 0.4, 0.7, 0.9 },
 			// Categories.FALSE)
 			// .addExample(new Double[] { 0.1, 0.4, 0.7, 1.0 },
@@ -67,18 +73,15 @@ public class IoT1 {
 		} catch (Exception e)
 
 		{
-//		catch (UnknownDecisionException e)
-//
-//		{
+			// catch (UnknownDecisionException e)
+			//
+			// {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(dt.toString());
 		Map<String, Double> case1 = new HashMap<String, Double>();
-		case1.put("Outlook", 0.3);
-		case1.put("Temperature", 0.4);
-		case1.put("Humidity", 0.7);
-		case1.put("Wind", 1.0);
+		case1.put("Heart", 98.0);
+		case1.put("Calories", 8.3954);
 
 		// case1.put("Outlook", (new
 		// StringDataPoint("Outlook",1,DataPointType.STRING,"Rain")));
