@@ -2,8 +2,8 @@
 ----
 
 ## Usage
-1. Generate IoTDataMiningFramework.war file.
-2. Deploy and import IoTDataMiningFramework.war file in eclipse project.
+1. Generate IoTDataMiningFramework.jar file.
+2. Deploy and import IoTDataMiningFramework.jar file in eclipse project.
 3. Make sure you have the right pom file with dependencies.
 5. Extend the existing models to create specialized ones
 
