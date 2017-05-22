@@ -11,8 +11,9 @@ import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
  */
 public class EWMA<T extends DataPoint> implements TimeSeries<T> {
 
-	double avg = 0.0;
-	double a;
+	protected double avg = 0.0;
+	protected double a;
+	protected double sigma = 0.0;
 
 	public EWMA(double a) throws RuntimeException {
 		if (a > 1)
@@ -36,12 +37,25 @@ public class EWMA<T extends DataPoint> implements TimeSeries<T> {
 		return this.avg;
 	}
 
-	public double calculateEWMA(double a, double avg, double value) {
+	protected double calculateEWMA(double a, double avg, double value) {
 		return a * avg + (1 - a) * value;
 	}
 
 	public void reset() {
 		this.avg = 0.0;
+	}
+
+	@Override
+	public double getStdDev() {
+		// TODO Auto-generated method stub
+		return this.sigma;
+	}
+
+	@Override
+	public void calculateStdDev(T dp) {
+		// TODO Auto-generated method stub
+		this.sigma=Math.sqrt(calculateEWMA(this.a, this.avg, (Double) dp.getValue()) + Math.pow(calculateEWMA(this.a, this.avg, Math.pow((Double) dp.getValue(), 2)), 2));
+//		return this.sigma;
 	}
 
 }

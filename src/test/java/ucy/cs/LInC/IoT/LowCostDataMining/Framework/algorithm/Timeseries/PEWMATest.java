@@ -6,6 +6,7 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Timeseries;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -62,7 +63,7 @@ public class PEWMATest {
 
 	@Test
 	public void testAddDataPoint1() {
-		DoubleDataPoint d = new DoubleDataPoint("test", 1, 0.1);
+		DoubleDataPoint d = new DoubleDataPoint("test", new Timestamp(1), 0.1);
 		double res = movingAverage.addDataPoint(d);
 		if (!((new Double(res)) instanceof Double))
 			fail();

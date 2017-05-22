@@ -8,5 +8,5 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.data;
  *
  */
 public enum DataPointType {
-	DOUBLE, INTEGER, STRING, CUSTOM
+	DOUBLE, INTEGER, STRING, DTdata, CUSTOM
 }

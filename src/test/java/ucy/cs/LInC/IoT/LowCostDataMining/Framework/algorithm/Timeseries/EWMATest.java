@@ -6,6 +6,7 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Timeseries;
 import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import org.junit.After;
@@ -56,13 +57,15 @@ public class EWMATest {
 		}
 		double result = movingAverage.getAverage();
 		double expectedValue = 0.7750003200000002;
-		if (result != expectedValue)
+		if (result != expectedValue) {
+			System.out.println(result);
 			fail("The expected average differs from the Moving average");
+		}
 	}
 
 	@Test
 	public void testAddDataPoint1() {
-		DoubleDataPoint d = new DoubleDataPoint("test", 1, 0.1);
+		DoubleDataPoint d = new DoubleDataPoint("test", new Timestamp(1), 0.1);
 		movingAverage.addDataPoint(d);
 		if (d.getValue() != movingAverage.getAverage())
 			fail();

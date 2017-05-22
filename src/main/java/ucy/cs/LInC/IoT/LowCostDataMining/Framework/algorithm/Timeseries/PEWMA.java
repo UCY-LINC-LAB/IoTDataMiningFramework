@@ -11,12 +11,11 @@ import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
  */
 public class PEWMA<T extends DataPoint> extends EWMA<T> {
 
-	double b;
-	double sigma = 0.0;
-	double z = 0.0;
+	private double b;
+	private double z = 0.0;
 //	double s1 = 0.0;
 //	double s2 = 0.0;
-	double prob = 0.0;
+	private double prob = 0.0;
 
 	public PEWMA(double a, double b) {
 		super(a);
@@ -39,20 +38,17 @@ public class PEWMA<T extends DataPoint> extends EWMA<T> {
 //		this.s1 = calculateEWMA(this.a, this.avg, (Double) dp.getValue());
 //		this.s2 = calculateEWMA(this.a, this.avg, Math.pow((Double) dp.getValue(), 2));
 //		this.sigma = Math.sqrt(this.s2 + Math.pow(this.s1, 2));
-		this.sigma=calculateSigma(dp);
+		calculateStdDev(dp);
+		this.sigma=getStdDev();
 		return this.avg;
 	}
 
-	public double probability(double z) {
+	private double probability(double z) {
 
 		return (1/Math.sqrt(2*Math.PI))*Math.exp(-(Math.pow(z, 2))/2);
 		
 	}
-	
-	public double calculateSigma(T dp){
-		return Math.sqrt(calculateEWMA(this.a, this.avg, (Double) dp.getValue()) + Math.pow(calculateEWMA(this.a, this.avg, Math.pow((Double) dp.getValue(), 2)), 2));
-	}
-	
+		
 	@Override
 	public void reset() {
 		this.avg = 0.0;

@@ -8,10 +8,14 @@ package ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Timeseries;
  *
  */
 public interface TimeSeries <T> {
-		
+			
 	public double getAverage();
 	
 	public double addDataPoint(T dp);
+	
+	public double getStdDev();
+	
+	public void calculateStdDev(T dp);
 	
 	public void reset();
 

@@ -1,0 +1,11 @@
+client
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.Timeseries
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.classification.decisiontree
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.classification.decisiontree.feature
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.classification.decisiontree.impurity
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.classification.decisiontree.label
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.classification.decisiontree.utils
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.algorithm.clustering.kMeans
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.data
+ucy.cs.LInC.IoT.LowCostDataMining.Framework.resource

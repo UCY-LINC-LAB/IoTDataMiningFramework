@@ -13,11 +13,12 @@ import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
  */
 public class SimpleMovingAverage<T extends DataPoint> implements TimeSeries<T> {
 
-	double avg;
-	int count;
-	int windowSize;
+	private double avg;
+	private int count;
+	private int windowSize;
 //	DataPoint outOfScope;
-	ArrayList<DataPoint> window = new ArrayList<DataPoint>();
+	private ArrayList<DataPoint> window = new ArrayList<DataPoint>();
+	private double sigma;
 
 	public SimpleMovingAverage(int windowSize) {
 		this.count = 0;
@@ -50,6 +51,18 @@ public class SimpleMovingAverage<T extends DataPoint> implements TimeSeries<T> {
 		this.avg = 0.0;
 		this.count = 0;	
 		this.window=new ArrayList<DataPoint>();
+	}
+
+	@Override
+	public double getStdDev() {
+		// TODO Auto-generated method stub
+		return this.sigma;
+	}
+
+	@Override
+	public void calculateStdDev(T dp) {
+		// TODO Auto-generated method stub
+		this.sigma=Math.sqrt(Math.pow((Double)dp.getValue()-this.avg,2)/this.count);
 	}
 
 }

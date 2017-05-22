@@ -4,10 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.Bound;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPoint;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DataPointType;
 import ucy.cs.LInC.IoT.LowCostDataMining.Framework.data.DoubleDataPoint;
@@ -146,8 +146,8 @@ public class ReadCSV <T extends DataPoint>{
 			while ((line = br.readLine()) != null) {
 				// use given delimiter as separator
 				String[] str = line.split(delimiter);
-				DoubleDataPoint dp = new DoubleDataPoint("dataPoint" + count, count, Double.parseDouble(str[column]));
-				Bound<DoubleDataPoint> doubleDataPoint = new Bound <DoubleDataPoint> (dp);
+				DoubleDataPoint dp = new DoubleDataPoint("dataPoint" + count, new Timestamp(count), Double.parseDouble(str[column]));
+//				Bound<DoubleDataPoint> doubleDataPoint = new Bound <DoubleDataPoint> (dp);
 				data.add(dp);
 				count++;
 			}
@@ -159,7 +159,7 @@ public class ReadCSV <T extends DataPoint>{
 		return data;
 	}
 	
-	public ArrayList<String> readData(ArrayList<DoubleVector> data, String delimiter, int[] columns, int lblCol, DataPointType type) {
+	public ArrayList<String> readData(ArrayList<T> data, String delimiter, int[] columns, int lblCol, DataPointType type) {
 
 //		HashMap<String,DoubleVector> data = new HashMap<String,DoubleVector>();
 		
@@ -175,9 +175,9 @@ public class ReadCSV <T extends DataPoint>{
 					colData[i]=Double.parseDouble(str[columns[i]]);
 				}
 				
-				DoubleVector dp = new DoubleVector("dataPoint" + count, count, colData);
-				Bound<DoubleVector> doubleDataPoint = new Bound <DoubleVector> (dp);
-				data.add(dp);
+				DoubleVector dp = new DoubleVector("dataPoint" + count, new Timestamp(count), colData);
+//				Bound<DoubleVector> doubleDataPoint = new Bound <DoubleVector> (dp);
+				data.add((T)dp);
 				lbls.add(str[lblCol]);
 				count++;
 			}
